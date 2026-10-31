@@ -1,0 +1,266 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package Login;
+
+import Login.LoginFrame;
+
+import javax.swing.JOptionPane;
+
+import sarisaristoreinventoryandsalesmanagementsytem.FrameUtils;
+import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
+
+import Database.DBConnection;
+import java.sql.SQLException;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.security.MessageDigest;
+import java.nio.charset.StandardCharsets;
+
+public class Authentication extends javax.swing.JFrame {
+    
+    private String userRole;
+
+
+    public Authentication(String userRole) {
+        this.userRole = userRole; 
+        
+        initComponents();
+        
+        //Screen Size Code
+        setBounds(FrameUtils.getScreenBounds());
+        
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        welcomePanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        verify = new javax.swing.JButton();
+        back = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        pinField = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        showPin = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
+
+        welcomePanel.setBackground(new java.awt.Color(153, 153, 153));
+        welcomePanel.setPreferredSize(new java.awt.Dimension(1920, 1080));
+        welcomePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        jLabel1.setText("Sari-Sari Store Inventory & Sales Management System");
+        welcomePanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 550, 50));
+
+        jLabel2.setFont(new java.awt.Font("Impact", 0, 36)); // NOI18N
+        jLabel2.setText("Welcome!");
+        welcomePanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 160, 50));
+
+        jLabel3.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        jLabel3.setText("Login As:");
+        welcomePanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, 180, 50));
+
+        jButton2.setFont(new java.awt.Font("Impact", 0, 12)); // NOI18N
+        jButton2.setText("Staff");
+        welcomePanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 410, 120, 40));
+
+        jButton3.setFont(new java.awt.Font("Impact", 0, 12)); // NOI18N
+        jButton3.setText("Owner");
+        welcomePanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 120, 40));
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(102, 102, 102));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel6.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel6.setText("ADMIN AUTHENTICATION");
+
+        verify.setBackground(new java.awt.Color(0, 102, 255));
+        verify.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        verify.setForeground(new java.awt.Color(255, 255, 255));
+        verify.setText("VERIFY");
+        verify.addActionListener(this::verifyActionPerformed);
+
+        back.setBackground(new java.awt.Color(153, 153, 153));
+        back.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        back.setForeground(new java.awt.Color(255, 255, 255));
+        back.setText("BACK");
+        back.addActionListener(this::backActionPerformed);
+
+        jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel7.setText("Please enter the 6-digit PIN to continue.");
+
+        pinField.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
+        pinField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255)));
+        pinField.addActionListener(this::pinFieldActionPerformed);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\key-6313_128.png")); // NOI18N
+        jLabel4.setText("jLabel4");
+
+        showPin.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        showPin.setText("Show PIN");
+        showPin.addActionListener(this::showPinActionPerformed);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(139, 139, 139))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(247, 247, 247))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(pinField, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(128, 128, 128))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(showPin, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(verify, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                                .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(62, 62, 62))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(pinField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(showPin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(verify, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\DEFENSE.png")); // NOI18N
+        jLabel5.setText("jLabel5");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void verifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verifyActionPerformed
+
+        String pin = new String(pinField.getPassword());
+
+        if (pin.isEmpty()) {
+            JOptionPane.showMessageDialog(this,"Please enter your Admin PIN.","Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String sql = "SELECT owner_pin FROM tbl_users "
+                   + "WHERE user_role = 'Owner'";
+
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement pst = conn.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            if (rs.next()) {
+                String storedPin = rs.getString("owner_pin");
+
+                if (storedPin != null && pin.equals(storedPin)) {
+
+                    JOptionPane.showMessageDialog(this,"Admin authentication successful!");
+
+                    MainMenuFrame menu = new MainMenuFrame(userRole);
+                    menu.setVisible(true);
+                    this.dispose();
+
+                } else {
+                    JOptionPane.showMessageDialog(this,"Incorrect Admin PIN.","Error",JOptionPane.ERROR_MESSAGE);
+                    pinField.setText("");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this,"Owner account not found.","Error",JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this,"Unable to verify PIN: " + e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_verifyActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        LoginFrame login = new LoginFrame();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backActionPerformed
+
+    private void pinFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pinFieldActionPerformed
+
+    private void showPinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPinActionPerformed
+        if(showPin.isSelected()){
+            pinField.setEchoChar((char)0); // 0 (null)
+        }else{
+            pinField.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showPinActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField pinField;
+    private javax.swing.JCheckBox showPin;
+    private javax.swing.JButton verify;
+    private javax.swing.JPanel welcomePanel;
+    // End of variables declaration//GEN-END:variables
+
+    private MainMenuFrame MainMenu() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void disclose() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+}
